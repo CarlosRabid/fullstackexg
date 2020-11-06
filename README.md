@@ -72,17 +72,17 @@ Open [http://localhost:3000](http://localhost:3000) for ckecking webApp in brows
 
 Initially you will see empty: you can  
 start searching usernames and checking also the inventory related to that user. 
-![initialdesk](https://raw.githubusercontent.com/CarlosRabid/shrimpfarm/master/public/initialdesk.png "Landing Screen")
+![initialdesk](https://raw.githubusercontent.com/CarlosRabid/fullstackexg/main/public/initialdesk.png "Landing Screen")
 
 ## Running the tests: GET request
 
-![getnew](https://raw.githubusercontent.com/CarlosRabid/shrimpfarm/master/public/createfarm.png "Search username")
+![getnew](https://raw.githubusercontent.com/CarlosRabid/fullstackexg/main/public/requestusername.png "Search username")
 
 When you type the username of a person, you will be granted information
 displayed in a favorable way. Also analytics have been made to resemble more capabilities 
 in the future. 
 
-![inventory](https://raw.githubusercontent.com/CarlosRabid/shrimpfarm/master/public/createponds.png "Inventory")
+![inventory](https://raw.githubusercontent.com/CarlosRabid/fullstackexg/main/public/inventory.png "Inventory")
 
 Once you have the information of user, you can check
 Inventory to see the user's main stats and useful info. 
@@ -90,11 +90,11 @@ Inventory to see the user's main stats and useful info.
 
 ## Job Openings.
 
-![openings](https://raw.githubusercontent.com/CarlosRabid/shrimpfarm/master/public/pondcreated.png "Job Openings")
+![openings](https://raw.githubusercontent.com/CarlosRabid/fullstackexg/main/public/job_openings.png "Job Openings")
 
 In Job Openings you can check latests job opportunities and most important aspects are shown.
 
-![jobopenings](https://raw.githubusercontent.com/CarlosRabid/shrimpfarm/master/public/updatefarm.png "Job_Openings")
+![jobopenings](https://raw.githubusercontent.com/CarlosRabid/fullstackexg/main/public/jobopenings.png "Job_Openings")
 
 
 ### Delete Info
