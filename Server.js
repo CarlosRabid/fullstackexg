@@ -11,7 +11,7 @@ let axios = require("axios");
 const { response } = require("express");
 
 app.use(express.static(path.join(__dirname, 'build')));
-app.use(express.static(path.join(__dirname, "components")));
+app.use(express.static(path.join(__dirname, 'components')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -25,7 +25,8 @@ app.use(function (req, res, next) {
   next();
 });
 // mongoose.set('debug', true)
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fullexg", { useNewUrlParser: true });
+mongoose.connect(process.env.CLEARDB_DATABASE_URL || "mongodb://localhost/fullexg", { useNewUrlParser: true });
+// mongoose.connect("mongodb://localhost/fullexg", { useNewUrlParser: true });
 
 const Schema = mongoose.Schema;
 const personSchema = new Schema({
@@ -110,6 +111,4 @@ app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(PORT, function () {
-  console.log("run");
-});
+app.listen(PORT);
