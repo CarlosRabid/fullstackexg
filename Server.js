@@ -39,6 +39,7 @@ const personSchema = new Schema({
   eduPdate: String,
   languages: Array,
   pcg: String,
+  stats: Object,
 });
 
 const peoplecollection = mongoose.model(
@@ -77,6 +78,7 @@ app.get("/bios/:userName", function (req, res) {
         parsData.professionalCultureGenomeResults.groups[0].text +
         " , " +
         parsData.professionalCultureGenomeResults.groups[1].text,
+        stats: parsData.stats,
     });
     res.send(nPerson);
   });
@@ -88,19 +90,11 @@ app.post("/jobs", async function (req, res) {
   let size = query.size;
   let aggregate = query.aggregate;
 
-  // axios.post('https://search.torre.co/opportunities/_search/?', null, {
-  // params: {offset,size,aggregate}}).then(response =>
-  //   console.log(JSON.stringify(response.data))
-  // )
-  // .catch(error =>
-  //   console.log(error)
-  // )
-  // res.send(response.data)
   var request = require("request");
   var options = {
     method: "POST",
     url:
-      "https://search.torre.co/opportunities/_search/?&offset=0&size=1&aggregate=false",
+      `https://search.torre.co/opportunities/_search/?&offset=${offset}&size=${size}&aggregate=${aggregate}`,
     headers: {},
   };
   request(options, async function (error, response) {

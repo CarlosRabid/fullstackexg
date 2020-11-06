@@ -5,18 +5,21 @@ import axios from "axios";
 import Navmenu from "./Components/actions/navmenu";
 import Cardsingle from "./Components/actions/cardsingle";
 import Openings from "./Components/actions/openings";
+import Inventory from "./Components/actions/inventory";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      jobs: [],
+      jobs: "",
       name: "",
       snack: false,
       card: false,
       expanded: false,
       openings: false,
+      inventory: false,
+      stats: ""
     };
   }
   update = async (event) => {
@@ -39,6 +42,7 @@ class App extends Component {
       nodata = false;
       return this.setState({
         data: data.data,
+        stats: data.data.stats,
         card: true,
       });
     }
@@ -46,22 +50,29 @@ class App extends Component {
   };
 
   jobChecker = async () => {
+    let jobsarray = []
     let offset = 0;
-    let size = 1;
-    let aggregate = true;
+    let size = 6;
+    let aggregate = false;
     let response = await axios.post(`http://localhost:4328/jobs`, {
       data: { offset, size, aggregate },
     });
     let nodata = false;
-    if (response.data.results[0]) {
-      nodata = true;
-    } else {
-      nodata = false;
-      return this.setState({
-        jobs: response.data.results,
-        openings: true,
-      });
-    }
+    response.data.results.map(el => jobsarray.push(el))
+    // this.setState({ jobs: response.data.results, openings: true});
+    console.log(jobsarray)
+    await response.data.results[0] ? (
+      this.setState({jobs: jobsarray, openings: true})) 
+    :
+    (this.setState({openings:false}))
+    //   nodata = true;
+    // } else {
+    //   nodata = false;
+    //   console.log(response.data);
+    //   return this.setState({
+    //     jobs: response.data.results,
+    //     openings: true,
+    
     return;
   };
 
@@ -177,9 +188,18 @@ class App extends Component {
         ) : (
           <></>
         )}
-        {this.state.openings ? (
+        {this.state.openings && this.state.input=="Job Openings" ? (
           <Openings
             jobs={this.state.jobs}
+            handleExpandClick={this.handleExpandClick}
+          />
+        ) : (
+          <></>
+        )}
+        {this.state.input === "Inventory" ? (
+          <Inventory
+          data={this.state.data}
+            stats={this.state.stats}
             handleExpandClick={this.handleExpandClick}
           />
         ) : (
