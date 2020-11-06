@@ -59,6 +59,7 @@ app.get("/bios/:userName", function (req, res) {
     data
   ) {
     let parsData = await JSON.parse(data);
+    console.log(parsData)
     let person = parsData.person;
     nPerson = new peoplecollection({
       id: person.id,
@@ -82,7 +83,7 @@ app.get("/bios/:userName", function (req, res) {
         parsData.professionalCultureGenomeResults.groups[1].text,
         stats: parsData.stats,
     });
-    res.send(nPerson);
+    return res.send(nPerson);
   });
 });
 
@@ -102,12 +103,11 @@ app.post("/jobs", async function (req, res) {
   request(options, async function (error, response) {
     if (error)
       throw new Error(error);
-    console.log(response.body);
     return res.send(response.body)
   });
 });
 
-app.get('/*', function (req, res) {
+app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
