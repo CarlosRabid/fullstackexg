@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
-const PORT = 4328;
+const PORT = process.env.PORT || 4328;
 const router = express.Router();
 const request = require("request");
 
@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
   next();
 });
 // mongoose.set('debug', true)
-mongoose.connect("mongodb://localhost/fullexg", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fullexg", { useNewUrlParser: true });
 
 const Schema = mongoose.Schema;
 const personSchema = new Schema({
