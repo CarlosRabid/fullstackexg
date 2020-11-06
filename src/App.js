@@ -6,6 +6,8 @@ import Navmenu from "./Components/actions/navmenu";
 import Cardsingle from "./Components/actions/cardsingle";
 import Openings from "./Components/actions/openings";
 import Inventory from "./Components/actions/inventory";
+import * as constant from './Components/actions/constant'
+const dinamicRoute = window.location.host.includes("localhost") ? constant.LOCAL_GET : constant.PROD_GET
 
 class App extends Component {
   constructor(props) {
@@ -34,7 +36,7 @@ class App extends Component {
     }
   };
   checker = async () => {
-    let data = await axios.get(`http://localhost:4328/bios/${this.state.name}`);
+    let data = await axios.get(`${dinamicRoute}/bios/${this.state.name}`);
     let nodata = false;
     if (data.data[0]) {
       nodata = true;
@@ -54,7 +56,7 @@ class App extends Component {
     let offset = 0;
     let size = 6;
     let aggregate = false;
-    let response = await axios.post(`http://localhost:4328/jobs`, {
+    let response = await axios.post(`${dinamicRoute}/jobs`, {
       data: { offset, size, aggregate },
     });
     let nodata = false;
@@ -92,7 +94,7 @@ class App extends Component {
 
   delDatafromDB = async () => {
     if (window.confirm("Are you sure you want to delete All Info ?")) {
-      await axios.delete("http://localhost:4328/empty", {});
+      await axios.delete(`${dinamicRoute}/empty`, {});
       this.closeModal();
       return;
     } else {
