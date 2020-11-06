@@ -10,6 +10,7 @@ const request = require("request");
 let axios = require("axios");
 const { response } = require("express");
 
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.static(path.join(__dirname, "components")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -103,6 +104,10 @@ app.post("/jobs", async function (req, res) {
     console.log(response.body);
     return res.send(response.body)
   });
+});
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 app.listen(PORT, function () {
